@@ -103,8 +103,49 @@ public class Colosseum {
      *         <p>
      */
     public static Pokemon buildPokemon() {
-        Pokemon returnPokemon = null;
-        return returnPokemon;
+        Pokemon tempPokemon = null;
+        int t;
+        do {
+          printTypeMenu();
+          t = myScan.nextInt();
+          if (t != 1 && t!= 2 && t != 3) {
+            System.out.println("Sorry you must pick 1, 2, or 3.");
+          }
+        } while (t != 1 && t!= 2 && t != 3);
+        switch (t) {
+          case 1: tempPokemon = new ElectricPokemon(); break;
+          case 2: tempPokemon = new FirePokemon(); break;
+          case 3: tempPokemon = new WaterPokemon(); break;
+        }
+        System.out.println("Please enter a name for your pokemon: ");
+        myScan.nextLine();
+        String name = myScan.nextLine();
+        tempPokemon.setName(name);
+        System.out.println("Enter number of hit points between 1 and 50:");
+        int hit = myScan.nextInt();
+        while(hit > 50 || hit < 1) {
+          System.out.println("Sorry. Hit points must be between 1 and 50: ");
+          hit = myScan.nextInt();
+        }
+        tempPokemon.setHitPoints(hit);
+        System.out.println("You have 50 points to split between attack and" +
+            " defense levels.");
+        System.out.println("Enter number of attack between 1 and 49:");
+        int attack = myScan.nextInt();
+        while(attack > 49 || attack < 1) {
+          System.out.println("Sorry. Attack must be between 1 and 49: ");
+          attack = myScan.nextInt();
+        }
+        tempPokemon.setAttackLevel(attack);
+        System.out.println("Enter defense level:");
+        int def = myScan.nextInt();
+        while (def > 50 - attack || def < 1) {
+          System.out.println("Sorry. Defense must be between 1 and " + attack
+              + ": ");
+          def = myScan.nextInt();
+        }
+        tempPokemon.setDefenseLevel(def);
+        return tempPokemon;
     }
 
     /**
